@@ -7,30 +7,52 @@
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: #1b4332; /* 深綠色背景 */
-            color: #fff;
+            background-color: #f0f7f0; /* 淺綠色背景 */
+            margin: 0;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px;
-            margin: 0;
-            min-height: 100vh;
         }
 
-        /* 左上角標題與藍勾勾 */
-        .header-title {
-            align-self: flex-start;
+        /* 頂部導覽列：頭像 + 名字 + 藍勾勾 */
+        .header {
+            width: 100%;
+            max-width: 500px;
             display: flex;
             align-items: center;
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-bottom: 30px;
-            padding-left: 10px;
+            margin-bottom: 10px;
         }
-        .header-title .badge {
+        .header img.top-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            margin-right: 12px;
+            object-fit: cover;
+            border: 2px solid #fff;
+        }
+        .header h1 {
+            font-size: 1.25rem;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            color: #333;
+        }
+        .header .badge {
             width: 18px;
             height: 18px;
             margin-left: 6px;
+        }
+
+        /* 大標題 */
+        .main-title {
+            width: 100%;
+            max-width: 500px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 15px 0 25px 0;
+            text-align: left;
+            color: #1a1a1a;
         }
 
         /* 影片網格佈局 */
@@ -38,120 +60,196 @@
             width: 100%;
             max-width: 500px;
             display: grid;
-            grid-template-columns: 1fr 1fr; /* 兩欄顯示，想一欄改為 1fr */
+            grid-template-columns: 1fr 1fr; /* 兩欄 */
             gap: 15px;
-            padding-bottom: 80px;
         }
 
-        /* 影片卡片外殼 */
+        /* 影片卡片 */
         .video-card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.2s;
+        }
+        .video-card:active {
+            transform: scale(0.98);
+        }
+
+        /* 影片封面圖容器 (仿 TikTok 比例) */
+        .thumbnail-box {
             position: relative;
             width: 100%;
-            padding-bottom: 150%; /* 比例約為 9:13.5，適合手機直式 */
-            border-radius: 12px;
-            overflow: hidden;
-            background-color: #000;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            cursor: pointer;
-            text-decoration: none; /* 移除超連結底線 */
-            display: block;
+            padding-bottom: 130%; /* 較長的直式比例 */
+            background: #000;
         }
-
-        /* 影片封面圖 */
-        .video-card img.cover {
+        .thumbnail-box img.cover {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             object-fit: cover;
-            opacity: 0.8; /* 讓圖片暗一點，播放鈕更亮 */
-            transition: transform 0.3s;
         }
 
-        /* 滑鼠滑過縮放 */
-        .video-card:hover img.cover {
-            transform: scale(1.05);
-            opacity: 1;
-        }
-
-        /* 播放按鈕圖示 */
-        .play-button {
+        /* 播放按鈕小圖示 (在圖片中央) */
+        .play-overlay {
             position: absolute;
-            top: 50%;
-            left: 50%;
+            top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.9);
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.8);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 2;
-            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            opacity: 0.9;
+        }
+        .play-overlay::after {
+            content: '';
+            border-style: solid;
+            border-width: 8px 0 8px 12px;
+            border-color: transparent transparent transparent #333;
         }
 
-        /* 播放三角型 */
-        .play-button::after {
-            content: '';
-            display: block;
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: 10px 0 10px 18px;
-            border-color: transparent transparent transparent #1b4332;
-            margin-left: 4px;
+        /* 影片下方的文字區塊 */
+        .info-box {
+            padding: 12px 10px;
+            display: flex;
+            align-items: center;
+        }
+        .info-box img.small-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            margin-right: 8px;
+            flex-shrink: 0;
+            object-fit: cover;
+        }
+        .text-content {
+            overflow: hidden;
+        }
+        .video-title {
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin: 0 0 2px 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: #333;
+        }
+        .video-desc {
+            font-size: 0.7rem;
+            color: #888;
+            margin: 0;
         }
 
         .footer {
-            margin-top: auto;
-            padding: 20px 0;
-            font-size: 0.75rem;
-            color: rgba(255, 255, 255, 0.6);
+            margin-top: 50px;
+            padding: 20px;
+            font-size: 0.8rem;
+            color: #88a08a;
             text-align: center;
         }
     </style>
 </head>
 <body>
 
-    <div class="header-title">
-        甜蜜老张
-        <img src="https://png.pngtree.com/png-vector/20230408/ourmid/pngtree-instagram-bule-tick-insta-blue-star-vector-png-image_6695210.png" alt="Verified" class="badge">
+    <div class="header">
+        <img src="https://jack0852.github.io/abc2018/IMG_0506.jpeg" class="top-avatar" alt="avatar">
+        <h1>甜蜜老张 <img src="https://png.pngtree.com/png-vector/20230408/ourmid/pngtree-instagram-bule-tick-insta-blue-star-vector-png-image_6695210.png" class="badge"></h1>
     </div>
 
-    <h2 style="margin-bottom: 25px;">甜蜜老张精选视频</h2>
+    <div class="main-title">甜蜜老张精选视频</div>
 
     <div class="video-grid">
         
         <a href="https://www.tiktok.com/@wylz004/video/7492319384900275511?_r=1&_t=ZS-93YweX2fRGH" class="video-card" target="_blank">
-            <img src="https://0440947b1f30ff8f2f425d73997042d9.r2.cloudflarestorage.com/feiyu-pro/tiktok/tiktok_ZSabRYXWU_%25E5%25B0%2581%25E9%259D%25A2.jpg?response-content-type=application%2Foctet-stream&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=4e477b69c2f61ca9614c6786469ec43b%2F20260201%2FAPAC%2Fs3%2Faws4_request&X-Amz-Date=20260201T163523Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=be112b6bde0dd726e1fd6fccb9a3feff85ee9e7da43b5966dacb58ed07ffd0cb" class="cover" alt="影片 1">
-            <div class="play-button"></div>
+            <div class="thumbnail-box">
+                <img src="https://0440947b1f30ff8f2f425d73997042d9.r2.cloudflarestorage.com/feiyu-pro/tiktok/tiktok_ZSabRYXWU_%25E5%25B0%2581%25E9%259D%25A2.jpg?response-content-type=application%2Foctet-stream&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=4e477b69c2f61ca9614c6786469ec43b%2F20260201%2FAPAC%2Fs3%2Faws4_request&X-Amz-Date=20260201T163523Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=be112b6bde0dd726e1fd6fccb9a3feff85ee9e7da43b5966dacb58ed07ffd0cb" class="cover">
+                <div class="play-overlay"></div>
+            </div>
+            <div class="info-box">
+                <img src="https://jack0852.github.io/abc2018/IMG_0506.jpeg" class="small-avatar">
+                <div class="text-content">
+                    <p class="video-title">
+要由内而外的自信</p>
+                    <p class="video-desc">甜蜜老张</p>
+                </div>
+            </div>
         </a>
 
-        <a href="https://www.tiktok.com/@你的帳號/video/影片ID2" class="video-card" target="_blank">
-            <img src="影片封面圖網址2.jpg" class="cover" alt="影片 2">
-            <div class="play-button"></div>
+        <a href="https://www.tiktok.com/@wylz004/video/7442925113328028945?_r=1&_t=ZS-93YxpQyIGAu" class="video-card" target="_blank">
+            <div class="thumbnail-box">
+                <img src="https://0440947b1f30ff8f2f425d73997042d9.r2.cloudflarestorage.com/feiyu-pro/tiktok/tiktok_ZSab8YWxD_%25E5%25B0%2581%25E9%259D%25A2.jpg?response-content-type=application%2Foctet-stream&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=4e477b69c2f61ca9614c6786469ec43b%2F20260201%2FAPAC%2Fs3%2Faws4_request&X-Amz-Date=20260201T165138Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=2544d8e6607806f9ec828920e665a4b3010a9a75227010d853660b7586cdd9d6" class="cover">
+                <div class="play-overlay"></div>
+            </div>
+            <div class="info-box">
+                <img src="https://jack0852.github.io/abc2018/IMG_0506.jpeg" class="small-avatar">
+                <div class="text-content">
+                    <p class="video-title">
+你该如何应对</p>
+                    <p class="video-desc">甜蜜老张</p>
+                </div>
+            </div>
         </a>
 
-        <a href="https://www.tiktok.com/@你的帳號/video/影片ID3" class="video-card" target="_blank">
-            <img src="影片封面圖網址3.jpg" class="cover" alt="影片 3">
-            <div class="play-button"></div>
+        <a href="https://www.tiktok.com/@wylz004/video/7396546809583242502?_r=1&_t=ZS-93Yy1Hj0zsS" class="video-card" target="_blank">
+            <div class="thumbnail-box">
+                <img src="https://0440947b1f30ff8f2f425d73997042d9.r2.cloudflarestorage.com/feiyu-pro/tiktok/tiktok_7396546809583242502_%25E5%25B0%2581%25E9%259D%25A2.jpg?response-content-type=application%2Foctet-stream&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=4e477b69c2f61ca9614c6786469ec43b%2F20260201%2FAPAC%2Fs3%2Faws4_request&X-Amz-Date=20260201T165540Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=f12acbaab92cdfad2b26f50217671848abda59efc037d371e3ac6a28a809a7bc" class="cover">
+                <div class="play-overlay"></div>
+            </div>
+            <div class="info-box">
+                <img src="https://jack0852.github.io/abc2018/IMG_0506.jpeg" class="small-avatar">
+                <div class="text-content">
+                    <p class="video-title">
+有福不享没苦硬吃</p>
+                    <p class="video-desc">甜蜜老张</p>
+                </div>
+            </div>
         </a>
 
-        <a href="https://www.tiktok.com/@你的帳號/video/影片ID4" class="video-card" target="_blank">
-            <img src="影片封面圖網址4.jpg" class="cover" alt="影片 4">
-            <div class="play-button"></div>
+        <a href="https://www.tiktok.com/@wylz004/video/7351986728225361158?_r=1&_t=ZS-93YyNrGnEPs" class="video-card" target="_blank">
+            <div class="thumbnail-box">
+                <img src="https://0440947b1f30ff8f2f425d73997042d9.r2.cloudflarestorage.com/feiyu-pro/tiktok/tiktok_7351986728225361158_%25E5%25B0%2581%25E9%259D%25A2.jpg?response-content-type=application%2Foctet-stream&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=4e477b69c2f61ca9614c6786469ec43b%2F20260201%2FAPAC%2Fs3%2Faws4_request&X-Amz-Date=20260201T165759Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=06a3d265e639c24c61d336f47bfcf834d1525e9eac4c70522464e37f9cff92ee" class="cover">
+                <div class="play-overlay"></div>
+            </div>
+            <div class="info-box">
+                <img src="https://jack0852.github.io/abc2018/IMG_0506.jpeg" class="small-avatar">
+                <div class="text-content">
+                    <p class="video-title">
+二选一的友谊（后续来了） #麦乐瑟 #甜蜜老张</p>
+                    <p class="video-desc">甜蜜老张</p>
+                </div>
+            </div>
         </a>
 
-        <a href="https://www.tiktok.com/@你的帳號/video/影片ID5" class="video-card" target="_blank">
-            <img src="影片封面圖網址5.jpg" class="cover" alt="影片 5">
-            <div class="play-button"></div>
+        <a href="影片連結5" class="video-card" target="_blank">
+            <div class="thumbnail-box">
+                <img src="封面圖5.jpg" class="cover">
+                <div class="play-overlay"></div>
+            </div>
+            <div class="info-box">
+                <img src="https://jack0852.github.io/abc2018/IMG_0506.jpeg" class="small-avatar">
+                <div class="text-content">
+                    <p class="video-title">影片標題 5</p>
+                    <p class="video-desc">甜蜜老张</p>
+                </div>
+            </div>
         </a>
 
-        <a href="https://www.tiktok.com/@你的帳號/video/影片ID6" class="video-card" target="_blank">
-            <img src="影片封面圖網址6.jpg" class="cover" alt="影片 6">
-            <div class="play-button"></div>
+        <a href="影片連結6" class="video-card" target="_blank">
+            <div class="thumbnail-box">
+                <img src="封面圖6.jpg" class="cover">
+                <div class="play-overlay"></div>
+            </div>
+            <div class="info-box">
+                <img src="https://jack0852.github.io/abc2018/IMG_0506.jpeg" class="small-avatar">
+                <div class="text-content">
+                    <p class="video-title">影片標題 6</p>
+                    <p class="video-desc">甜蜜老张</p>
+                </div>
+            </div>
         </a>
 
     </div>
