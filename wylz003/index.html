@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>青岛大姨张大霞</title>
+    <style>
+        :root {
+            --bg-color: #f6f7f8;
+            --card-bg: #ffffff;
+            --text-main: #1d1d1f;
+            --text-sub: #86868b;
+            --yt-red: #FF0000;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+            background-color: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 15px;
+            margin: 0;
+            color: var(--text-main);
+        }
+
+        /* 個人資料區 */
+        .profile { text-align: center; margin-bottom: 20px; }
+        .profile img.avatar {
+            width: 90px; height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom: 12px;
+        }
+        .name-row { display: flex; align-items: center; justify-content: center; gap: 4px; }
+        .name-row h1 { font-size: 20px; font-weight: 600; margin: 0; }
+        .badge { width: 18px; height: 18px; }
+
+        /* 簡介區塊 */
+        .bio {
+            width: 100%; max-width: 380px;
+            text-align: center; margin-bottom: 25px;
+            font-size: 14px; color: #6e6e73; line-height: 1.6;
+            white-space: pre-wrap;
+        }
+
+        /* 連結按鈕容器 */
+        .links-container { width: 100%; max-width: 400px; margin-bottom: 35px; }
+        .link-card {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--card-bg);
+            color: var(--text-main);
+            text-decoration: none;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-radius: 30px;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            transition: 0.2s;
+        }
+        .link-card:active { transform: scale(0.98); }
+        .link-card.youtube { color: var(--yt-red); }
+
+        /* 影片區塊 */
+        .video-section { width: 100%; max-width: 400px; }
+        .video-section h3 { font-size: 16px; margin-bottom: 15px; padding-left: 5px; }
+
+        /* 影片卡片結構 */
+        .video-item {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            text-decoration: none;
+            display: block;
+            color: inherit;
+            transition: transform 0.3s ease;
+        }
+        .video-item:hover { transform: translateY(-3px); }
+
+        .video-cover {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #000;
+        }
+        .video-cover img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9); }
+        
+        .play-icon {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 45px; height: 45px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        /* 影片下方文字資訊區 */
+        .video-info {
+            display: flex;
+            padding: 12px;
+            align-items: center;
+            gap: 12px;
+        }
+        .video-info img.small-avatar {
+            width: 38px; height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .text-content { display: flex; flex-direction: column; gap: 2px; }
+        .video-title { font-size: 14px; font-weight: 600; line-height: 1.4; }
+        .creator-name {
+            font-size: 12px; color: var(--text-sub);
+            display: flex; align-items: center; gap: 4px;
+        }
+        .small-badge { width: 13px; height: 13px; }
+
+        .footer { margin: 40px 0; font-size: 12px; color: #ccc; text-align: center; width: 100%; }
+    </style>
+</head>
+<body>
+
+    <div class="profile">
+        <img src="https://jack0852.github.io/abc2018/IMG_0508.jpeg" class="avatar">
+        <div class="name-row">
+            <h1>青岛大姨张大霞</h1>
+            <img src="https://png.pngtree.com/png-vector/20230408/ourmid/pngtree-instagram-bule-tick-insta-blue-star-vector-png-image_6695210.png" class="badge">
+        </div>
+    </div>
+
+    <div class="bio">
+        商务：GSKH008
+        摊牌了 不装了 其实我是一堆演员
+        精彩内容持续更新～
+        ❤️❤️❤️❤️
+    </div>
+
+    <div class="links-container">
+        <a href="https://www.tiktok.com/@wylz003" class="link-card" target="_blank">TikTok</a>
+        
+        <a href="https://youtube.com/@zhangdaxia?si=wrqIbGuk3YKmo3Ih" class="link-card youtube" target="_blank"> YouTube</a>
+    </div>
+
+    <div class="video-section">
+        <h3>精选视频</h3>
+        
+        <a href="https://www.tiktok.com/@wylz003/video/7455904756062604549" class="video-item" target="_blank">
+            <div class="video-cover">
+                <img src="https://p16-sign-va.tiktokcdn.com/tos-maliva-p-0068/oESGuAlAIDxAQeLgOm0AGYWe2PdjETI8xICmZe~tplv-tiktokx-origin.image?dr=14575&x-expires=1770184800&x-signature=hn8NnkV5P5GTkvOJYGW6ZH8riLI%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my">
+                <div class="play-icon"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            </div>
+            <div class="video-info">
+                <img src="https://jack0852.github.io/abc2018/IMG_0508.jpeg" class="small-avatar">
+                <div class="text-content">
+                    <span class="video-title">
+来拜年的亲戚有福了，这次学到真东西了！</span>
+                    <span class="creator-name">青岛大姨张大霞 <img src="https://png.pngtree.com/png-vector/20230408/ourmid/pngtree-instagram-bule-tick-insta-blue-star-vector-png-image_6695210.png" class="small-badge"></span>
+                </div>
+            </div>
+        </a>
+
+        <a href="https://www.tiktok.com/@wylz003/video/7441883222985706769" class="video-item" target="_blank">
+            <div class="video-cover">
+                <img src="https://p16-sign-va.tiktokcdn.com/tos-maliva-p-0068/owCECfdlIQ6RDwWQCE2EAwBJ4BpFIZDnmg6TeC~tplv-tiktokx-origin.image?dr=14575&x-expires=1770184800&x-signature=dEoZ%2BQtQ81dMKVSp%2Bm9vaMud2Dk%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my">
+                <div class="play-icon"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            </div>
+            <div class="video-info">
+                <img src="https://jack0852.github.io/abc2018/IMG_0508.jpeg" class="small-avatar">
+                <div class="text-content">
+                    <span class="video-title">
+老教师：没错我就是桃李满天下！</span>
+                    <span class="creator-name">青岛大姨张大霞 <img src="https://png.pngtree.com/png-vector/20230408/ourmid/pngtree-instagram-bule-tick-insta-blue-star-vector-png-image_6695210.png" class="small-badge"></span>
+                </div>
+            </div>
+        </a>
+
+        <a href="https://www.tiktok.com/@wylz003/video/7396564420916301062" class="video-item" target="_blank">
+            <div class="video-cover">
+                <img src="https://p16-sign-va.tiktokcdn.com/tos-maliva-p-0068/oMwVBfi9DCSNFjYIFlE05pECSCSIXebgkmjHeA~tplv-tiktokx-origin.image?dr=14575&x-expires=1770181200&x-signature=RktTeEjNz7mLtoj7p%2Fwk8AlQWhY%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my">
+                <div class="play-icon"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            </div>
+            <div class="video-info">
+                <img src="https://jack0852.github.io/abc2018/IMG_0508.jpeg" class="small-avatar">
+                <div class="text-content">
+                    <span class="video-title">
+好消息：张图转新学校了！坏消息：班主任竟然......</span>
+                    <span class="creator-name">青岛大姨张大霞 <img src="https://png.pngtree.com/png-vector/20230408/ourmid/pngtree-instagram-bule-tick-insta-blue-star-vector-png-image_6695210.png" class="small-badge"></span>
+                </div>
+            </div>
+        </a>
+
+    </div>
+
+    <div class="footer">© 2026 青岛大姨张大霞 All Rights Reserved.</div>
+
+</body>
+</html>
