@@ -44,7 +44,6 @@
             margin-left: 5px;
         }
 
-        /* 新增：簡介區塊樣式 */
         .bio-container {
             width: 100%;
             max-width: 380px;
@@ -53,7 +52,7 @@
             line-height: 1.6;
             font-size: 0.95rem;
             color: #555;
-            background: rgba(255, 255, 255, 0.5); /* 半透明白底 */
+            background: rgba(255, 255, 255, 0.5);
             padding: 15px;
             border-radius: 15px;
         }
@@ -95,13 +94,52 @@
             font-weight: bold;
         }
 
-        .tt-container {
+        /* 自訂影片預覽圖樣式 */
+        .video-thumbnail-card {
+            display: block;
+            position: relative;
             width: 100%;
             margin-bottom: 20px;
-            border-radius: 12px;
+            border-radius: 15px;
             overflow: hidden;
-            background: #fff;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            text-decoration: none;
+        }
+        .video-thumbnail-card:hover {
+            transform: scale(1.02);
+        }
+        .video-thumbnail-card img.preview {
+            width: 100%;
+            display: block;
+            aspect-ratio: 9/16; /* 符合 TikTok 直式比例 */
+            object-fit: cover;
+            filter: brightness(0.9);
+        }
+
+        /* 播放按鈕 */
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+        }
+        .play-button::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 12px 0 12px 20px;
+            border-color: transparent transparent transparent #333;
+            margin-left: 5px;
         }
 
         .footer {
@@ -123,36 +161,31 @@
 
     <div class="bio-container">
         老张和他的种族<br>
-想搞辣个合作就➕ TMXZL112233<br>
-看什莫哇！负责人啊写野啊导演啊都是辣个啊志仓<br>
+        想搞辣个合作就➕ TMXZL112233<br>
+        看什莫哇！负责人啊写野啊導演啊都是辣個啊志仓
     </div>
 
     <div class="links-container">
-        <a href="https://www.tiktok.com/@wylz004?_r=1&_t=ZS-93YlZrr37H2" class="link-card" target="_blank">🎵 TikTok</a>
+        <a href="https://www.tiktok.com/@wylz004?_r=1&_t=ZS-93YlZrr37H2" class="link-card" target="_blank">🎵 進入我的 TikTok 主頁</a>
     </div>
 
     <div class="video-section">
-        <h3>🎬 精選 TikTok 影片</h3>
+        <h3>🎬 精选视频 (点击播放)</h3>
         
-        <div class="tt-container">
-            <blockquote class="tiktok-embed" data-video-id="7492319384900275511" style="max-width: 605px; min-width: 325px;">
-                <section></section>
-            </blockquote>
-        </div>
+        <a href="https://www.tiktok.com/@wylz004/video/7492319384900275511" class="video-thumbnail-card" target="_blank">
+            <img src="https://p16-sign-va.tiktokcdn.com/tos-maliva-p-0068/oEM6jPAa9DfIIEYQCAIAw6Gedx6gFLEGAeSElC~tplv-tiktokx-origin.image?dr=14575&x-expires=1770181200&x-signature=ORAiKBjAhfBTFlLFwlh8i0j9pmk%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my" alt="影片 1" class="preview">
+            <div class="play-button"></div>
+        </a>
 
-        <div class="tt-container">
-            <blockquote class="tiktok-embed" data-video-id="7442925113328028945" style="max-width: 605px; min-width: 325px;">
-                <section></section>
-            </blockquote>
-        </div>
+        <a href="https://www.tiktok.com/@wylz004/video/7442925113328028945" class="video-thumbnail-card" target="_blank">
+            <img src="https://p16-sign-sg.tiktokcdn.com/tos-alisg-p-0037/oIEKIABARlUSADDnmFBdftIrNU3EQEAgUepRCr~tplv-tiktokx-origin.image?dr=14575&x-expires=1770181200&x-signature=NzaX17OGl0D7w1Eij9pnyRh2zUE%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my" alt="影片 2" class="preview">
+            <div class="play-button"></div>
+        </a>
 
-        <div class="tt-container">
-            <blockquote class="tiktok-embed" data-video-id="7396546809583242502" style="max-width: 605px; min-width: 325px;">
-                <section></section>
-            </blockquote>
-        </div>
-
-        <script async src="https://www.tiktok.com/embed.js"></script>
+        <a href="https://www.tiktok.com/@wylz004/video/7396546809583242502" class="video-thumbnail-card" target="_blank">
+            <img src="https://p16-sign-va.tiktokcdn.com/tos-maliva-p-0068/oMwVBfi9DCSNFjYIFlE05pECSCSIXebgkmjHeA~tplv-tiktokx-origin.image?dr=14575&x-expires=1770181200&x-signature=RktTeEjNz7mLtoj7p%2Fwk8AlQWhY%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my" alt="影片 3" class="preview">
+            <div class="play-button"></div>
+        </a>
     </div>
 
     <div class="footer">
