@@ -5,69 +5,92 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>商品訂購 - LINE 群組限定</title>
     <style>
-        body { font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC", "Microsoft JhengHei", sans-serif; margin: 0; padding: 0; background-color: #f9f9f9; color: #333; }
-        .container { max-width: 640px; margin: 0 auto; background: #fff; padding-bottom: 100px; box-shadow: 0 0 10px rgba(0,0,0,0.05); }
+        body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; overflow-x: hidden; }
+        .container { max-width: 640px; margin: 0 auto; background: #fff; padding-bottom: 100px; position: relative; }
         img { width: 100%; display: block; }
         
-        /* 價格與文字資訊區 */
+        /* 商品資訊區 */
         .product-content { padding: 20px; border-bottom: 10px solid #f4f4f4; }
-        .product-title { font-size: 22px; font-weight: bold; margin-bottom: 15px; line-height: 1.4; color: #000; }
         .info-list { background: #fffcf0; border: 1px dashed #ffd166; padding: 15px; border-radius: 8px; }
-        .info-item { margin: 10px 0; font-size: 17px; display: flex; align-items: center; }
         .price-tag { color: #e4393c; font-weight: bold; font-size: 20px; }
-        
-        /* 圖片備註樣式 */
-        .img-note { background: #eee; color: #666; font-size: 13px; text-align: center; padding: 5px 0; border-bottom: 1px solid #ddd; }
+        .img-note { background: #eee; color: #666; font-size: 13px; text-align: center; padding: 5px 0; }
+
+        /* --- 動態評論跑馬燈樣式 --- */
+        #comment-box {
+            position: fixed;
+            top: 15%; /* 顯示在螢幕上方偏中 */
+            left: 10px;
+            width: 280px;
+            z-index: 999;
+            pointer-events: none; /* 防止遮擋點擊 */
+        }
+        .comment-item {
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 30px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            animation: fadeInUp 0.5s ease forwards, fadeOut 0.5s ease 2.5s forwards;
+            opacity: 0;
+        }
+        .avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+            background-color: #ccc;
+        }
+
+        @keyframes fadeInUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; transform: translateY(-20px); }
+        }
 
         /* 底部 LINE 按鈕 */
         .footer-sticky { 
             position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); 
             width: 100%; max-width: 640px; background: #fff; padding: 12px 0; 
-            box-shadow: 0 -3px 12px rgba(0,0,0,0.1); text-align: center; z-index: 100;
+            box-shadow: 0 -3px 12px rgba(0,0,0,0.1); text-align: center;
         }
         .btn-line { 
             background-color: #06C755; color: white; display: inline-block;
             width: 90%; padding: 15px 0; font-size: 18px; font-weight: bold; 
-            text-decoration: none; border-radius: 50px; transition: 0.3s;
-            box-shadow: 0 4px 0 #05a748;
+            text-decoration: none; border-radius: 50px;
         }
-        .btn-line:active { transform: translateY(2px); box-shadow: 0 2px 0 #05a748; }
-        
-        /* 提示動畫 */
-        .notice-bar { background: #000; color: #fff; text-align: center; padding: 8px; font-size: 14px; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="notice-bar">🔥 批發熱銷中，加入群組享最快報價 🔥</div>
+<div id="comment-box"></div>
 
+<div class="container">
     <div class="img-note">商品圖片 1</div>
-    <img src="https://codeberg.org/tvdcott2/jack/raw/branch/main/IMG_0511.jpeg" alt="商品主圖">
+    <img src="https://codeberg.org/tvdcott2/jack/raw/branch/main/IMG_0511.jpeg" alt="主圖">
 
     <div class="product-content">
-        <div class="product-title">✨ 精選商品 - 規格詳情 ✨</div>
-        
+        <h2 style="font-size: 20px;">✨ 精選商品 - 規格詳情 ✨</h2>
         <div class="info-list">
-            <div class="info-item">⚖️ <strong>商品重量：</strong> 32 公克</div>
-            <div class="info-item">💰 <strong>($) 批價：</strong> <span class="price-tag">120元</span></div>
-            <div class="info-item">📦 <strong>批發門檻：</strong> 10個起批 1200元</div>
-            <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">
-            <div class="info-item">💬 <strong>(line) 群友價：</strong> <span class="price-tag">1個 160元</span></div>
+            <p>⚖️ <strong>商品重量：</strong> 32 公克</p>
+            <p>💰 <strong>($) 批價：</strong> <span class="price-tag">120元</span> (10個起批)</p>
+            <p>💬 <strong>(line) 群友價：</strong> <span class="price-tag">1個 160元</span></p>
         </div>
     </div>
 
     <div class="img-note">詳情照片 1</div>
     <img src="https://codeberg.org/tvdcott2/jack/raw/branch/main/IMG_0511.jpeg" alt="詳情1">
-
     <div class="img-note">詳情照片 2</div>
-    <img src="https://codeberg.org/tvdcott2/jack/raw/branch/main/IMG_0513.jpeg" alt="詳情2">
-
+    <img src="https://codeberg.org/tvdcott2/jack/raw/branch/main/IMG_0511.jpeg" alt="詳情2">
     <div class="img-note">詳情照片 3</div>
-    <img src="請放入圖片連結" alt="詳情3">
-
+    <img src="請填入連結3" alt="詳情3">
     <div class="img-note">詳情照片 4</div>
-    <img src="請放入圖片連結" alt="詳情4">
+    <img src="請填入連結4" alt="詳情4">
 
     <div class="footer-sticky">
         <a href="https://line.me/ti/g2/1Hl4CXrhWVAZtOhRvUpwrv8HXXXXAfSRrkcdcw?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" class="btn-line">
@@ -75,6 +98,41 @@
         </a>
     </div>
 </div>
+
+<script>
+    // 評論資料庫
+    const comments = [
+        { name: "王大明", text: "很棒的商品！👍", img: "https://i.pravatar.cc/100?u=1" },
+        { name: "陳小美", text: "價格很實在，品質很好", img: "https://i.pravatar.cc/100?u=2" },
+        { name: "李先生", text: "剛加入群組訂了20個", img: "https://i.pravatar.cc/100?u=3" },
+        { name: "張小姐", text: "給家人買的，超划算", img: "https://i.pravatar.cc/100?u=4" },
+        { name: "林口批發王", text: "這檔價格真的便宜，推！", img: "https://i.pravatar.cc/100?u=5" }
+    ];
+
+    function showComment() {
+        const box = document.getElementById('comment-box');
+        const rand = comments[Math.floor(Math.random() * comments.length)];
+        
+        const div = document.createElement('div');
+        div.className = 'comment-item';
+        div.innerHTML = `
+            <img src="${rand.img}" class="avatar">
+            <div><strong>${rand.name}</strong>: ${rand.text}</div>
+        `;
+        
+        box.appendChild(div);
+
+        // 3秒後移除該元素，保持網頁乾淨
+        setTimeout(() => {
+            div.remove();
+        }, 3000);
+    }
+
+    // 每隔 4 秒跑出一個新評論
+    setInterval(showComment, 4000);
+    // 初始先跑一個
+    showComment();
+</script>
 
 </body>
 </html>
