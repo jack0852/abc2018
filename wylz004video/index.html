@@ -15,7 +15,7 @@
             align-items: center;
         }
 
-        /* 頂部導覽列：頭像 + 名字 + 藍勾勾 */
+        /* 頂部導覽列 */
         .header {
             width: 100%;
             max-width: 500px;
@@ -38,13 +38,19 @@
             align-items: center;
             color: #333;
         }
+
+        /* 藍勾勾通用樣式 */
+        .badge {
+            width: 15px;
+            height: 15px;
+            margin-left: 4px;
+            vertical-align: middle;
+        }
         .header .badge {
             width: 18px;
             height: 18px;
-            margin-left: 6px;
         }
 
-        /* 大標題 */
         .main-title {
             width: 100%;
             max-width: 500px;
@@ -55,16 +61,15 @@
             color: #1a1a1a;
         }
 
-        /* 影片網格佈局 */
+        /* 影片網格 */
         .video-grid {
             width: 100%;
             max-width: 500px;
             display: grid;
-            grid-template-columns: 1fr 1fr; /* 兩欄 */
+            grid-template-columns: 1fr 1fr;
             gap: 15px;
         }
 
-        /* 影片卡片 */
         .video-card {
             background: #fff;
             border-radius: 15px;
@@ -74,15 +79,12 @@
             color: inherit;
             transition: transform 0.2s;
         }
-        .video-card:active {
-            transform: scale(0.98);
-        }
+        .video-card:active { transform: scale(0.98); }
 
-        /* 影片封面圖容器 (仿 TikTok 比例) */
         .thumbnail-box {
             position: relative;
             width: 100%;
-            padding-bottom: 130%; /* 較長的直式比例 */
+            padding-bottom: 130%;
             background: #000;
         }
         .thumbnail-box img.cover {
@@ -91,7 +93,6 @@
             object-fit: cover;
         }
 
-        /* 播放按鈕小圖示 (在圖片中央) */
         .play-overlay {
             position: absolute;
             top: 50%; left: 50%;
@@ -112,23 +113,21 @@
             border-color: transparent transparent transparent #333;
         }
 
-        /* 影片下方的文字區塊 */
+        /* 影片下方文字區 */
         .info-box {
             padding: 12px 10px;
             display: flex;
             align-items: center;
         }
         .info-box img.small-avatar {
-            width: 32px;
-            height: 32px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             margin-right: 8px;
             flex-shrink: 0;
             object-fit: cover;
         }
-        .text-content {
-            overflow: hidden;
-        }
+        .text-content { overflow: hidden; }
         .video-title {
             font-size: 0.85rem;
             font-weight: bold;
@@ -139,9 +138,11 @@
             color: #333;
         }
         .video-desc {
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             color: #888;
             margin: 0;
+            display: flex;
+            align-items: center;
         }
 
         .footer {
@@ -156,7 +157,7 @@
 <body>
 
     <div class="header">
-        <img src="https://jack0852.github.io/abc2018/IMG_0506.jpeg" class="top-avatar" alt="avatar">
+        <img src="https://jack0852.github.io/abc2018/IMG_0506.jpeg" class="top-avatar">
         <h1>甜蜜老张 <img src="https://png.pngtree.com/png-vector/20230408/ourmid/pngtree-instagram-bule-tick-insta-blue-star-vector-png-image_6695210.png" class="badge"></h1>
     </div>
 
@@ -164,7 +165,7 @@
 
     <div class="video-grid">
         
-        <a href="https://www.tiktok.com/@wylz004/video/7492319384900275511?_r=1&_t=ZS-93YweX2fRGH" class="video-card" target="_blank">
+        <a href="https://www.tiktok.com/@wylz004/video/7492319384900275511" class="video-card" target="_blank">
             <div class="thumbnail-box">
                 <img src="https://p16-sign-va.tiktokcdn.com/tos-maliva-p-0068/oEM6jPAa9DfIIEYQCAIAw6Gedx6gFLEGAeSElC~tplv-tiktokx-origin.image?dr=14575&x-expires=1770271200&x-signature=GWDIAfeXoJpwEoMJbYWFFIJpm3k%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my2" class="cover">
                 <div class="play-overlay"></div>
@@ -172,14 +173,13 @@
             <div class="info-box">
                 <img src="https://jack0852.github.io/abc2018/IMG_0506.jpeg" class="small-avatar">
                 <div class="text-content">
-                    <p class="video-title">
-要由内而外的自信</p>
-                    <p class="video-desc">甜蜜老张</p>
+                    <p class="video-title">要由内而外的自信</p>
+                    <p class="video-desc">甜蜜老张 <img src="https://png.pngtree.com/png-vector/20230408/ourmid/pngtree-instagram-bule-tick-insta-blue-star-vector-png-image_6695210.png" class="badge"></p>
                 </div>
             </div>
         </a>
 
-        <a href="https://www.tiktok.com/@wylz004/video/7442925113328028945?_r=1&_t=ZS-93YxpQyIGAu" class="video-card" target="_blank">
+        <a href="https://www.tiktok.com/@wylz004/video/7442925113328028945" class="video-card" target="_blank">
             <div class="thumbnail-box">
                 <img src="https://p16-sign-sg.tiktokcdn.com/tos-alisg-p-0037/oIEKIABARlUSADDnmFBdftIrNU3EQEAgUepRCr~tplv-tiktokx-origin.image?dr=14575&x-expires=1770271200&x-signature=fHOXYwKR88L3HLXLRAN3z%2BvsN0A%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my2" class="cover">
                 <div class="play-overlay"></div>
@@ -187,14 +187,13 @@
             <div class="info-box">
                 <img src="https://jack0852.github.io/abc2018/IMG_0506.jpeg" class="small-avatar">
                 <div class="text-content">
-                    <p class="video-title">
-你该如何应对</p>
-                    <p class="video-desc">甜蜜老张</p>
+                    <p class="video-title">你该如何应对</p>
+                    <p class="video-desc">甜蜜老张 <img src="https://png.pngtree.com/png-vector/20230408/ourmid/pngtree-instagram-bule-tick-insta-blue-star-vector-png-image_6695210.png" class="badge"></p>
                 </div>
             </div>
         </a>
 
-        <a href="https://www.tiktok.com/@wylz004/video/7396546809583242502?_r=1&_t=ZS-93Yy1Hj0zsS" class="video-card" target="_blank">
+        <a href="https://www.tiktok.com/@wylz004/video/7396546809583242502" class="video-card" target="_blank">
             <div class="thumbnail-box">
                 <img src="https://p16-sign-va.tiktokcdn.com/tos-maliva-p-0068/oMwVBfi9DCSNFjYIFlE05pECSCSIXebgkmjHeA~tplv-tiktokx-origin.image?dr=14575&x-expires=1770271200&x-signature=vDZ4kZrRjGG9mKj5FcycINIiHnc%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my2" class="cover">
                 <div class="play-overlay"></div>
@@ -202,14 +201,13 @@
             <div class="info-box">
                 <img src="https://jack0852.github.io/abc2018/IMG_0506.jpeg" class="small-avatar">
                 <div class="text-content">
-                    <p class="video-title">
-有福不享没苦硬吃</p>
-                    <p class="video-desc">甜蜜老张</p>
+                    <p class="video-title">有福不享没苦硬吃</p>
+                    <p class="video-desc">甜蜜老张 <img src="https://png.pngtree.com/png-vector/20230408/ourmid/pngtree-instagram-bule-tick-insta-blue-star-vector-png-image_6695210.png" class="badge"></p>
                 </div>
             </div>
         </a>
 
-        <a href="https://www.tiktok.com/@wylz004/video/7351986728225361158?_r=1&_t=ZS-93YyNrGnEPs" class="video-card" target="_blank">
+        <a href="https://www.tiktok.com/@wylz004/video/7351986728225361158" class="video-card" target="_blank">
             <div class="thumbnail-box">
                 <img src="https://p16-sign-va.tiktokcdn.com/tos-maliva-p-0068/c77a0fa57310425ca8a3dbb970a3163a_1711767826~tplv-tiktokx-origin.image?dr=14575&x-expires=1770271200&x-signature=AbOWPB1p7zbwhikeW1cYnwLkZwg%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my2" class="cover">
                 <div class="play-overlay"></div>
@@ -217,9 +215,8 @@
             <div class="info-box">
                 <img src="https://jack0852.github.io/abc2018/IMG_0506.jpeg" class="small-avatar">
                 <div class="text-content">
-                    <p class="video-title">
-二选一的友谊（后续来了） #麦乐瑟 #甜蜜老张</p>
-                    <p class="video-desc">甜蜜老张</p>
+                    <p class="video-title">二选一的友谊</p>
+                    <p class="video-desc">甜蜜老张 <img src="https://png.pngtree.com/png-vector/20230408/ourmid/pngtree-instagram-bule-tick-insta-blue-star-vector-png-image_6695210.png" class="badge"></p>
                 </div>
             </div>
         </a>
@@ -232,8 +229,8 @@
             <div class="info-box">
                 <img src="https://jack0852.github.io/abc2018/IMG_0506.jpeg" class="small-avatar">
                 <div class="text-content">
-                    <p class="video-title">担心的事情差点没发生</p>
-                    <p class="video-desc">甜蜜老张</p>
+                    <p class="video-title">担心的事情差点沒发生</p>
+                    <p class="video-desc">甜蜜老张 <img src="https://png.pngtree.com/png-vector/20230408/ourmid/pngtree-instagram-bule-tick-insta-blue-star-vector-png-image_6695210.png" class="badge"></p>
                 </div>
             </div>
         </a>
@@ -246,8 +243,8 @@
             <div class="info-box">
                 <img src="https://jack0852.github.io/abc2018/IMG_0506.jpeg" class="small-avatar">
                 <div class="text-content">
-                    <p class="video-title">《独家专访甜蜜老张&真子日记-老亨》两位搞笑大咖梦幻联动，拯救不开心！谁是你的快乐解药？</p>
-                    <p class="video-desc">甜蜜老张</p>
+                    <p class="video-title">独家专访夢幻联动</p>
+                    <p class="video-desc">甜蜜老张 <img src="https://png.pngtree.com/png-vector/20230408/ourmid/pngtree-instagram-bule-tick-insta-blue-star-vector-png-image_6695210.png" class="badge"></p>
                 </div>
             </div>
         </a>
