@@ -3,61 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>商品訂購 - LINE 群組限定</title>
+    <title>智慧無線高清可視掏耳勺</title>
     <style>
-        body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; overflow-x: hidden; }
+        body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
         .container { max-width: 640px; margin: 0 auto; background: #fff; padding-bottom: 100px; position: relative; }
         img { width: 100%; display: block; }
         
-        /* 商品資訊區 */
-        .product-content { padding: 20px; border-bottom: 10px solid #f4f4f4; }
+        /* 商品標題區 */
+        .product-header { padding: 20px; border-bottom: 8px solid #f4f4f4; }
+        .product-name { font-size: 20px; font-weight: bold; line-height: 1.5; color: #333; margin-bottom: 15px; }
+        
+        /* 價格顯示 */
+        .price-box { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
+        .current-price { color: #e4393c; font-size: 32px; font-weight: bold; }
+        .old-price { color: #999; text-decoration: line-through; font-size: 16px; }
+
+        /* 批發資訊區 */
         .info-list { background: #fffcf0; border: 1px dashed #ffd166; padding: 15px; border-radius: 8px; }
-        .price-tag { color: #e4393c; font-weight: bold; font-size: 20px; }
-        .img-note { background: #eee; color: #666; font-size: 13px; text-align: center; padding: 5px 0; }
+        .info-item { margin: 8px 0; font-size: 16px; }
+        .price-tag { color: #e4393c; font-weight: bold; }
+        
+        /* 圖片備註 */
+        .img-note { background: #f0f0f0; color: #888; font-size: 12px; text-align: center; padding: 6px 0; }
 
-        /* --- 動態評論跑馬燈樣式 --- */
-        #comment-box {
-            position: fixed;
-            top: 15%; /* 顯示在螢幕上方偏中 */
-            left: 10px;
-            width: 280px;
-            z-index: 999;
-            pointer-events: none; /* 防止遮擋點擊 */
+        /* 動態評論 */
+        #comment-box { position: fixed; top: 10%; left: 10px; width: 260px; z-index: 999; pointer-events: none; }
+        .comment-item { 
+            background: rgba(0, 0, 0, 0.75); color: white; padding: 10px 15px; 
+            border-radius: 50px; margin-bottom: 10px; display: flex; align-items: center; 
+            font-size: 14px; animation: fadeInUp 0.5s ease forwards, fadeOut 0.5s ease 2.5s forwards; opacity: 0;
         }
-        .comment-item {
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 30px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            font-size: 14px;
-            animation: fadeInUp 0.5s ease forwards, fadeOut 0.5s ease 2.5s forwards;
-            opacity: 0;
-        }
-        .avatar {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            margin-right: 10px;
-            background-color: #ccc;
-        }
+        .avatar { width: 25px; height: 25px; border-radius: 50%; margin-right: 10px; }
 
-        @keyframes fadeInUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        @keyframes fadeOut {
-            from { opacity: 1; }
-            to { opacity: 0; transform: translateY(-20px); }
-        }
+        @keyframes fadeInUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; transform: translateY(-15px); } }
 
         /* 底部 LINE 按鈕 */
         .footer-sticky { 
             position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); 
-            width: 100%; max-width: 640px; background: #fff; padding: 12px 0; 
-            box-shadow: 0 -3px 12px rgba(0,0,0,0.1); text-align: center;
+            width: 100%; max-width: 640px; background: #fff; padding: 15px 0; 
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1); text-align: center;
         }
         .btn-line { 
             background-color: #06C755; color: white; display: inline-block;
@@ -74,23 +59,31 @@
     <div class="img-note">商品圖片 1</div>
     <img src="https://codeberg.org/tvdcott2/jack/raw/branch/main/IMG_0511.jpeg" alt="主圖">
 
-    <div class="product-content">
-        <h2 style="font-size: 20px;">✨ 精選商品 - 規格詳情 ✨</h2>
+    <div class="product-header">
+        <div class="product-name">
+            批發可視掏耳勺智慧無線高清攝影機可視挖耳勺挖耳神器採耳棒跨境，耳朵專用內視鏡無線傳輸用手機一目了然
+        </div>
+        
+        <div class="price-box">
+            <span class="current-price">NT$ 160</span>
+            <span class="old-price">原價 NT$ 380</span>
+        </div>
+
         <div class="info-list">
-            <p>⚖️ <strong>商品重量：</strong> 32 公克</p>
-            <p>💰 <strong>($) 批價：</strong> <span class="price-tag">120元</span> (10個起批)</p>
-            <p>💬 <strong>(line) 群友價：</strong> <span class="price-tag">1個 160元</span></p>
+            <div class="info-item">⚖️ <strong>商品重量：</strong> 32 公克</div>
+            <div class="info-item">💰 <strong>($) 批價：</strong> <span class="price-tag">120元</span> (10個起批 1200元)</div>
+            <div class="info-item">💬 <strong>(line) 群友價：</strong> <span class="price-tag">1個 160元</span></div>
         </div>
     </div>
 
     <div class="img-note">詳情照片 1</div>
     <img src="https://codeberg.org/tvdcott2/jack/raw/branch/main/IMG_0511.jpeg" alt="詳情1">
     <div class="img-note">詳情照片 2</div>
-    <img src="https://codeberg.org/tvdcott2/jack/raw/branch/main/IMG_0511.jpeg" alt="詳情2">
+    <img src="https://codeberg.org/tvdcott2/jack/raw/branch/main/IMG_0513.jpeg" alt="詳情2">
     <div class="img-note">詳情照片 3</div>
-    <img src="請填入連結3" alt="詳情3">
+    <img src="連結3" alt="詳情3">
     <div class="img-note">詳情照片 4</div>
-    <img src="請填入連結4" alt="詳情4">
+    <img src="連結4" alt="詳情4">
 
     <div class="footer-sticky">
         <a href="https://line.me/ti/g2/1Hl4CXrhWVAZtOhRvUpwrv8HXXXXAfSRrkcdcw?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" class="btn-line">
@@ -100,37 +93,24 @@
 </div>
 
 <script>
-    // 評論資料庫
     const comments = [
-        { name: "王大明", text: "很棒的商品！👍", img: "https://i.pravatar.cc/100?u=1" },
-        { name: "陳小美", text: "價格很實在，品質很好", img: "https://i.pravatar.cc/100?u=2" },
-        { name: "李先生", text: "剛加入群組訂了20個", img: "https://i.pravatar.cc/100?u=3" },
-        { name: "張小姐", text: "給家人買的，超划算", img: "https://i.pravatar.cc/100?u=4" },
-        { name: "林口批發王", text: "這檔價格真的便宜，推！", img: "https://i.pravatar.cc/100?u=5" }
+        { name: "王*明", text: "畫面很清晰，好用！", img: "https://i.pravatar.cc/100?u=a1" },
+        { name: "陳*君", text: "已在群組下單 20 組", img: "https://i.pravatar.cc/100?u=a2" },
+        { name: "林*志", text: "這個批價真的很有競爭力", img: "https://i.pravatar.cc/100?u=a3" },
+        { name: "張*生", text: "無線傳輸很方便，推推", img: "https://i.pravatar.cc/100?u=a4" }
     ];
 
     function showComment() {
         const box = document.getElementById('comment-box');
         const rand = comments[Math.floor(Math.random() * comments.length)];
-        
         const div = document.createElement('div');
         div.className = 'comment-item';
-        div.innerHTML = `
-            <img src="${rand.img}" class="avatar">
-            <div><strong>${rand.name}</strong>: ${rand.text}</div>
-        `;
-        
+        div.innerHTML = `<img src="${rand.img}" class="avatar"><div><strong>${rand.name}</strong>: ${rand.text}</div>`;
         box.appendChild(div);
-
-        // 3秒後移除該元素，保持網頁乾淨
-        setTimeout(() => {
-            div.remove();
-        }, 3000);
+        setTimeout(() => div.remove(), 3000);
     }
 
-    // 每隔 4 秒跑出一個新評論
-    setInterval(showComment, 4000);
-    // 初始先跑一個
+    setInterval(showComment, 4500);
     showComment();
 </script>
 
