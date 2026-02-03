@@ -5,38 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>智慧無線高清可視掏耳勺</title>
     <style>
-        body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
+        body { font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC", "Microsoft JhengHei", sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
         .container { max-width: 640px; margin: 0 auto; background: #fff; padding-bottom: 100px; position: relative; }
-        img { width: 100%; display: block; }
+        img { width: 100%; display: block; background-color: #eee; min-height: 200px; } /* 增加灰色底色方便辨識圖片位置 */
         
-        /* 商品標題區 */
+        /* 商品資訊 */
         .product-header { padding: 20px; border-bottom: 8px solid #f4f4f4; }
         .product-name { font-size: 20px; font-weight: bold; line-height: 1.5; color: #333; margin-bottom: 15px; }
-        
-        /* 價格顯示 */
         .price-box { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
         .current-price { color: #e4393c; font-size: 32px; font-weight: bold; }
         .old-price { color: #999; text-decoration: line-through; font-size: 16px; }
 
-        /* 批發資訊區 */
         .info-list { background: #fffcf0; border: 1px dashed #ffd166; padding: 15px; border-radius: 8px; }
         .info-item { margin: 8px 0; font-size: 16px; }
         .price-tag { color: #e4393c; font-weight: bold; }
         
-        /* 圖片備註 */
-        .img-note { background: #f0f0f0; color: #888; font-size: 12px; text-align: center; padding: 6px 0; }
+        .img-note { background: #f0f0f0; color: #888; font-size: 12px; text-align: center; padding: 6px 0; border-bottom: 1px solid #ddd; font-weight: bold; }
 
-        /* 動態評論 */
-        #comment-box { position: fixed; top: 10%; left: 10px; width: 260px; z-index: 999; pointer-events: none; }
+        /* 純文字動態通知 */
+        #comment-box { position: fixed; top: 12%; left: 15px; z-index: 999; pointer-events: none; }
         .comment-item { 
-            background: rgba(0, 0, 0, 0.75); color: white; padding: 10px 15px; 
-            border-radius: 50px; margin-bottom: 10px; display: flex; align-items: center; 
-            font-size: 14px; animation: fadeInUp 0.5s ease forwards, fadeOut 0.5s ease 2.5s forwards; opacity: 0;
+            background: rgba(0, 0, 0, 0.7); color: white; padding: 8px 18px; 
+            border-radius: 20px; margin-bottom: 8px; font-size: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            animation: fadeInUp 0.5s ease forwards, fadeOut 0.5s ease 2.5s forwards; 
+            opacity: 0; white-space: nowrap;
         }
-        .avatar { width: 25px; height: 25px; border-radius: 50%; margin-right: 10px; }
 
-        @keyframes fadeInUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; transform: translateY(-15px); } }
+        @keyframes fadeInUp { from { transform: translateX(-20px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; transform: translateX(20px); } }
 
         /* 底部 LINE 按鈕 */
         .footer-sticky { 
@@ -57,7 +54,7 @@
 
 <div class="container">
     <div class="img-note">商品圖片 1</div>
-    <img src="https://codeberg.org/tvdcott2/jack/raw/branch/main/IMG_0511.jpeg" alt="主圖">
+    <img src="需填入主圖網址" alt="主圖">
 
     <div class="product-header">
         <div class="product-name">
@@ -77,13 +74,16 @@
     </div>
 
     <div class="img-note">詳情照片 1</div>
-    <img src="https://codeberg.org/tvdcott2/jack/raw/branch/main/IMG_0511.jpeg" alt="詳情1">
+    <img src="需填入詳情圖1網址" alt="詳情1">
+    
     <div class="img-note">詳情照片 2</div>
-    <img src="https://codeberg.org/tvdcott2/jack/raw/branch/main/IMG_0513.jpeg" alt="詳情2">
+    <img src="需填入詳情圖2網址" alt="詳情2">
+    
     <div class="img-note">詳情照片 3</div>
-    <img src="連結3" alt="詳情3">
+    <img src="需填入詳情圖3網址" alt="詳情3">
+    
     <div class="img-note">詳情照片 4</div>
-    <img src="連結4" alt="詳情4">
+    <img src="需填入詳情圖4網址" alt="詳情4">
 
     <div class="footer-sticky">
         <a href="https://line.me/ti/g2/1Hl4CXrhWVAZtOhRvUpwrv8HXXXXAfSRrkcdcw?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" class="btn-line">
@@ -93,25 +93,29 @@
 </div>
 
 <script>
-    const comments = [
-        { name: "王*明", text: "畫面很清晰，好用！", img: "https://i.pravatar.cc/100?u=a1" },
-        { name: "陳*君", text: "已在群組下單 20 組", img: "https://i.pravatar.cc/100?u=a2" },
-        { name: "林*志", text: "這個批價真的很有競爭力", img: "https://i.pravatar.cc/100?u=a3" },
-        { name: "張*生", text: "無線傳輸很方便，推推", img: "https://i.pravatar.cc/100?u=a4" }
+    const orders = [
+        "王*明 剛剛下單訂購了 10 組",
+        "陳*君 已加入 LINE 群組詢價",
+        "林*志 剛剛完成付款 1200元",
+        "張*生 諮詢了商品重量與詳情",
+        "李*華 剛剛下單訂購了 2 組",
+        "吳*宏 已領取群友優惠價",
+        "蔡*玲 剛剛確認了收貨地址",
+        "劉*傑 預訂了下週到貨批次"
     ];
 
-    function showComment() {
+    function showOrderNotice() {
         const box = document.getElementById('comment-box');
-        const rand = comments[Math.floor(Math.random() * comments.length)];
+        const text = orders[Math.floor(Math.random() * orders.length)];
         const div = document.createElement('div');
         div.className = 'comment-item';
-        div.innerHTML = `<img src="${rand.img}" class="avatar"><div><strong>${rand.name}</strong>: ${rand.text}</div>`;
+        div.innerText = `🔔 ${text}`;
         box.appendChild(div);
         setTimeout(() => div.remove(), 3000);
     }
 
-    setInterval(showComment, 4500);
-    showComment();
+    setInterval(showOrderNotice, 4500);
+    setTimeout(showOrderNotice, 1000);
 </script>
 
 </body>
