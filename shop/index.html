@@ -1,0 +1,37 @@
+/* 全域重置 */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background-color: #f8f8f8; color: #333; line-height: 1.6; }
+
+/* 容器寬度限制在 640px (移動端標準) */
+.container { max-width: 640px; margin: 0 auto; background: #fff; position: relative; }
+
+/* 頂部倒計時條 */
+.top-bar {
+    background: #ff0000; color: #fff; text-align: center;
+    padding: 8px 0; font-size: 14px; position: sticky; top: 0; z-index: 100;
+}
+
+/* 價格區塊 */
+.price-section { padding: 15px; background: #fff; }
+.current-price { color: #e4393c; font-size: 28px; font-weight: bold; }
+.tags { display: flex; gap: 5px; margin-top: 5px; }
+.tag { background: #fff0f0; color: #e4393c; font-size: 12px; padding: 2px 5px; border: 1px solid #e4393c; }
+
+/* 底部懸浮按鈕 */
+.sticky-footer {
+    position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 100%; max-width: 640px; background: #fff;
+    padding: 10px; border-top: 1px solid #ddd; display: flex; justify-content: center;
+}
+.btn-buy-now {
+    background: linear-gradient(90deg, #ff4d4f, #ff7875);
+    color: white; width: 90%; text-align: center; padding: 12px;
+    border-radius: 25px; font-weight: bold; text-decoration: none;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
