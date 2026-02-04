@@ -5,117 +5,192 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>智慧無線高清可視掏耳勺</title>
     <style>
-        body { font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC", "Microsoft JhengHei", sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
+        body { font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft JhengHei", sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; color: #333; }
         .container { max-width: 640px; margin: 0 auto; background: #fff; padding-bottom: 100px; position: relative; }
-        img { width: 100%; display: block; background-color: #eee; min-height: 200px; } /* 增加灰色底色方便辨識圖片位置 */
-        
-        /* 商品資訊 */
-        .product-header { padding: 20px; border-bottom: 8px solid #f4f4f4; }
-        .product-name { font-size: 20px; font-weight: bold; line-height: 1.5; color: #333; margin-bottom: 15px; }
-        .price-box { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
-        .current-price { color: #e4393c; font-size: 32px; font-weight: bold; }
-        .old-price { color: #999; text-decoration: line-through; font-size: 16px; }
+        img { width: 100%; display: block; }
 
-        .info-list { background: #fffcf0; border: 1px dashed #ffd166; padding: 15px; border-radius: 8px; }
-        .info-item { margin: 8px 0; font-size: 16px; }
-        .price-tag { color: #e4393c; font-weight: bold; }
-        
-        .img-note { background: #f0f0f0; color: #888; font-size: 12px; text-align: center; padding: 6px 0; border-bottom: 1px solid #ddd; font-weight: bold; }
-
-        /* 純文字動態通知 */
-        #comment-box { position: fixed; top: 12%; left: 15px; z-index: 999; pointer-events: none; }
-        .comment-item { 
-            background: rgba(0, 0, 0, 0.7); color: white; padding: 8px 18px; 
-            border-radius: 20px; margin-bottom: 8px; font-size: 14px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            animation: fadeInUp 0.5s ease forwards, fadeOut 0.5s ease 2.5s forwards; 
-            opacity: 0; white-space: nowrap;
+        /* --- 頂部滾動通知 (20人循環) --- */
+        #scroll-notice {
+            background: rgba(0,0,0,0.7); color: #fff; padding: 8px 15px; font-size: 13px;
+            position: fixed; top: 15px; left: 15px; border-radius: 50px; z-index: 1000;
+            display: flex; align-items: center; white-space: nowrap;
+            transition: opacity 0.5s;
         }
 
-        @keyframes fadeInUp { from { transform: translateX(-20px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-        @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; transform: translateX(20px); } }
+        /* 商品基礎資訊 */
+        .product-header { padding: 15px; border-bottom: 1px solid #eee; }
+        .product-name { font-size: 18px; font-weight: bold; line-height: 1.4; margin-bottom: 10px; }
+        .price-section { color: #e4393c; font-size: 26px; font-weight: bold; }
+        .old-price { color: #999; text-decoration: line-through; font-size: 14px; margin-left: 10px; font-weight: normal; }
 
-        /* 底部 LINE 按鈕 */
+        /* --- 商品規格選購 (仿截圖樣式) --- */
+        .sku-section { padding: 15px; border-top: 8px solid #f4f4f4; }
+        .sku-title { font-size: 14px; margin-bottom: 12px; color: #666; }
+        .sku-item { 
+            display: inline-block; border: 2px solid #b01f43; padding: 8px; 
+            border-radius: 4px; text-align: center; width: 80px; position: relative;
+        }
+        .sku-item img { width: 50px; height: 50px; margin: 0 auto 5px; background: #f8f8f8; }
+        .sku-item span { font-size: 12px; display: block; color: #b01f43; font-weight: bold; }
+        .sku-item::after { 
+            content: '✔'; position: absolute; bottom: -1px; right: -1px; 
+            background: #b01f43; color: #fff; font-size: 10px; width: 14px; height: 14px; 
+        }
+
+        /* --- 三段式頁籤 (商品描述/送貨付款/商品評價) --- */
+        .tabs { display: flex; border-bottom: 1px solid #eee; margin-top: 15px; position: sticky; top: 0; background: #fff; z-index: 10; }
+        .tab-item { flex: 1; text-align: center; padding: 12px 5px; font-size: 13px; cursor: pointer; color: #666; transition: 0.3s; }
+        .tab-item.active { color: #b01f43; border-bottom: 2px solid #b01f43; font-weight: bold; }
+        .tab-content { padding: 20px; font-size: 14px; line-height: 1.8; display: none; }
+        .tab-content.active { display: block; }
+
+        /* 評價清單樣式 */
+        .comment-list { list-style: none; padding: 0; margin: 0; }
+        .comment-row { border-bottom: 1px solid #eee; padding: 10px 0; font-size: 13px; }
+        .comment-user { font-weight: bold; color: #555; margin-right: 10px; }
+        .comment-star { color: #ff8a00; }
+
+        /* --- 側邊工具按鈕 --- */
+        .side-toolbar { position: fixed; right: 15px; bottom: 85px; display: flex; flex-direction: column; gap: 12px; z-index: 999; }
+        .tool-btn { 
+            width: 48px; height: 48px; background: #fff; border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15); text-decoration: none;
+        }
+        .tool-btn img { width: 30px; height: 30px; }
+        .btn-top { font-size: 22px; color: #333; font-weight: bold; border: 1px solid #eee; }
+
+        /* 底部固定購買按鈕 */
         .footer-sticky { 
             position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); 
-            width: 100%; max-width: 640px; background: #fff; padding: 15px 0; 
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.1); text-align: center;
+            width: 100%; max-width: 640px; background: #fff; padding: 12px 0; 
+            box-shadow: 0 -3px 12px rgba(0,0,0,0.1); text-align: center; z-index: 100;
         }
-        .btn-line { 
-            background-color: #06C755; color: white; display: inline-block;
-            width: 90%; padding: 15px 0; font-size: 18px; font-weight: bold; 
-            text-decoration: none; border-radius: 50px;
+        .btn-buy { 
+            background: #ff8a00; color: white; display: inline-block;
+            width: 92%; padding: 14px 0; font-size: 18px; font-weight: bold; 
+            text-decoration: none; border-radius: 5px;
         }
     </style>
 </head>
 <body>
 
-<div id="comment-box"></div>
+<div id="scroll-notice">🔔 載入中...</div>
 
 <div class="container">
-    <div class="img-note">商品圖片 1</div>
-    <img src="https://codeberg.org/tvdcott2/jack/raw/branch/main/IMG_0511.jpeg" alt="主圖">
+    <img src="需填入主圖連結" alt="主圖">
 
     <div class="product-header">
-        <div class="product-name">
-            批發可視掏耳勺智慧無線高清攝影機可視挖耳勺挖耳神器採耳棒跨境，耳朵專用內視鏡無線傳輸用手機一目了然
-        </div>
-        
-        <div class="price-box">
-            <span class="current-price">NT$ 160</span>
-            <span class="old-price">原價 NT$ 380</span>
-        </div>
-
-        <div class="info-list">
-            <div class="info-item">⚖️ <strong>商品重量：</strong> 32 公克</div>
-            <div class="info-item">💰 <strong>($) 批價：</strong> <span class="price-tag">120元</span> (10個起批 1200元)</div>
-            <div class="info-item">💬 <strong>(line) 群友價：</strong> <span class="price-tag">1個 160元</span></div>
+        <div class="product-name">批發可視掏耳勺智慧無線高清攝影機可視挖耳勺挖耳神器採耳棒</div>
+        <div class="price-section">
+            NT$ 160 <span class="old-price">原價 NT$ 380</span>
         </div>
     </div>
 
-    <div class="img-note">詳情照片 1</div>
-    <img src="https://codeberg.org/tvdcott2/jack/raw/branch/main/IMG_0511.jpeg" alt="詳情1">
-    
-    <div class="img-note">詳情照片 2</div>
-    <img src="https://codeberg.org/tvdcott2/jack/raw/branch/main/IMG_0513.jpeg" alt="詳情2">
-    
-    <div class="img-note">詳情照片 3</div>
-    <img src="需填入詳情圖3網址" alt="詳情3">
-    
-    <div class="img-note">詳情照片 4</div>
-    <img src="需填入詳情圖4網址" alt="詳情4">
+    <div class="sku-section">
+        <div class="sku-title">容量:</div>
+        <div class="sku-item">
+            <img src="https://codeberg.org/tvdcott2/jack/raw/branch/main/IMG_0511.jpeg" alt="標準規格">
+            <span>標準版</span>
+        </div>
+    </div>
+
+    <div class="tabs">
+        <div class="tab-item active" onclick="switchTab(0)">商品描述</div>
+        <div class="tab-item" onclick="switchTab(1)">送貨及付款方式</div>
+        <div class="tab-item" onclick="switchTab(2)">商品評價 (20)</div>
+    </div>
+
+    <div id="tab-0" class="tab-content active">
+        <strong>【產品特點】</strong><br>
+        • 高清攝像頭，手機螢幕直觀操作<br>
+        • 無線 WiFi 連接，兼容 iOS/Android<br>
+        • 柔軟矽膠勺頭，不傷耳道<br>
+        • 32g 極輕機身，握感舒適
+    </div>
+
+    <div id="tab-1" class="tab-content">
+        <strong>【送貨方式】</strong><br>
+        🚛 配送：賣家自行配送（聯絡官方 LINE 確認）<br><br>
+        <strong>【付款方式】</strong><br>
+        1️⃣ 銀行轉帳<br>
+        2️⃣ 貨到付款 (請備妥現金)
+    </div>
+
+    <div id="tab-2" class="tab-content">
+        <div class="comment-list">
+            </div>
+    </div>
+
+    <div class="side-toolbar">
+        <a href="#" class="tool-btn btn-top">↑</a>
+        <a href="https://line.me/ti/g2/..." class="tool-btn">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/LINE_logo.svg" alt="LINE 客服">
+        </a>
+    </div>
 
     <div class="footer-sticky">
-        <a href="https://line.me/ti/g2/1Hl4CXrhWVAZtOhRvUpwrv8HXXXXAfSRrkcdcw?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" class="btn-line">
-            加入 LINE 群組訂購
+        <a href="https://line.me/ti/g2/1Hl4CXrhWVAZtOhRvUpwrv8HXXXXAfSRrkcdcw..." class="btn-buy">
+            🛒 立即購買 (加入LINE群組)
         </a>
     </div>
 </div>
 
 <script>
-    const orders = [
-        "王*明 剛剛下單訂購了 10 組",
-        "陳*君 已加入 LINE 群組詢價",
-        "林*志 剛剛完成付款 1200元",
-        "張*生 諮詢了商品重量與詳情",
-        "李*華 剛剛下單訂購了 2 組",
-        "吳*宏 已領取群友優惠價",
-        "蔡*玲 剛剛確認了收貨地址",
-        "劉*傑 預訂了下週到貨批次"
+    // --- 1. 20人訂購滾動清單 ---
+    const orderData = [
+        "王*明 訂購了 標準版 +1", "李*美 剛剛下單成功", "張*志 已完成轉帳付款", 
+        "陳*玲 訂購了 10組批發", "林*華 剛剛詢問了規格", "蔡*傑 已加入LINE群組",
+        "劉*芳 訂購了 標準版 +2", "曾*生 諮詢貨到付款資訊", "謝*敏 剛剛領取了優惠",
+        "郭*豪 完成了 1200元支付", "洪*如 剛剛確認收件地址", "邱*誠 訂購了 批發特選",
+        "葉*廷 剛剛下單完成", "余*珍 已在群組預訂", "潘*君 訂購了 標準版 +1",
+        "何*宇 完成銀行轉帳", "鍾*英 剛剛下單成功", "彭*文 諮詢配送時間",
+        "沈*志 加入了群組下單", "江*茹 剛剛下單完成"
     ];
 
-    function showOrderNotice() {
-        const box = document.getElementById('comment-box');
-        const text = orders[Math.floor(Math.random() * orders.length)];
-        const div = document.createElement('div');
-        div.className = 'comment-item';
-        div.innerText = `🔔 ${text}`;
-        box.appendChild(div);
-        setTimeout(() => div.remove(), 3000);
+    let orderIdx = 0;
+    function updateOrderNotice() {
+        const notice = document.getElementById('scroll-notice');
+        notice.style.opacity = 0;
+        setTimeout(() => {
+            notice.innerText = "🔔 " + orderData[orderIdx];
+            notice.style.opacity = 1;
+            orderIdx = (orderIdx + 1) % orderData.length;
+        }, 500);
+    }
+    setInterval(updateOrderNotice, 4000);
+    updateOrderNotice();
+
+    // --- 2. 頁籤切換邏輯 ---
+    function switchTab(idx) {
+        document.querySelectorAll('.tab-item').forEach((item, i) => {
+            item.classList.toggle('active', i === idx);
+        });
+        document.querySelectorAll('.tab-content').forEach((content, i) => {
+            content.classList.toggle('active', i === idx);
+        });
     }
 
-    setInterval(showOrderNotice, 4500);
-    setTimeout(showOrderNotice, 1000);
+    // --- 3. 自動生成 20 個評價 ---
+    const comments = [
+        "物超所值，畫面真的好清楚！", "批發價格很有競爭力，推！", "賣家配送很快，聯絡LINE很方便。",
+        "終於能看清楚耳朵裡面了，推薦。", "無線連接很順暢，不會卡頓。", "這檔價格真的便宜。",
+        "120元的批價太佛心了。", "群友價也很划算，買了兩支。", "給家人用的，都很滿意。",
+        "包裝完整，服務態度很好。", "高清內視鏡果然厲害。", "買來試試看，結果超驚艷。",
+        "出貨速度快，值得回購。", "下次還會再來買批發。", "操作很簡單，說明書很詳細。",
+        "產品質感很好，32g真的很輕。", "手機看得很清楚，解決大問題。", "貨到付款很安心。",
+        "推薦給想做批發的朋友。", "五星好評，讚讚讚！"
+    ];
+    const userNames = ["張*", "李*", "王*", "趙*", "陳*", "林*", "曾*", "徐*"];
+    
+    const commentBox = document.querySelector('.comment-list');
+    for (let i = 1; i <= 20; i++) {
+        const row = document.createElement('div');
+        row.className = 'comment-row';
+        const user = userNames[i % userNames.length] + (i % 3 === 0 ? "小姐" : "先生");
+        row.innerHTML = `<span class="comment-user">${user}</span> <span class="comment-star">★★★★★</span><br>${comments[i-1]}`;
+        commentBox.appendChild(row);
+    }
 </script>
 
 </body>
