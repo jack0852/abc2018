@@ -353,6 +353,16 @@
             margin-top: 40px;
         }
         
+        .footer-text {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+        
+        .footer-year {
+            color: #ffd700;
+            font-weight: 600;
+        }
+        
         /* 烟花样式 */
         .firework {
             position: fixed;
@@ -533,13 +543,16 @@
                 </div>
                 
                 <div class="wish-box">
-                    <h3 class="wish-title">給晉鋮的生日願望</h3>
+                    <h3 class="wish-title">給晉鋮的三個祝福</h3>
                     <p class="wish-text">
-                        晉鋮，許下三個願望吧：<br><br>
-                        1. 第一個願望送給家人和朋友<br>
-                        2. 第二個願望送給未來的自己<br>
-                        3. 第三個願望要保密哦！<br><br>
-                        願晉鋮所有願望都能成真！
+                        <strong>第一個祝福：健康快樂</strong><br>
+                        願晉鋮身體健康，每天都充滿活力與快樂！<br><br>
+                        
+                        <strong>第二個祝福：夢想成真</strong><br>
+                        願晉鋮的所有夢想都能實現，事業學業都順利！<br><br>
+                        
+                        <strong>第三個祝福：友誼長存</strong><br>
+                        願晉鋮身邊永遠有真心的朋友，人生旅途不孤單！
                     </p>
                 </div>
             </div>
@@ -556,10 +569,10 @@
         </div>
         
         <footer>
-            <p>這份特別的生日祝福由杰哥打造、由HTML、CSS和JavaScript杰哥精心打造</p>
-            <p>© 2026 最炫酷的生日祝福 | 送給最特別的林晉鋮</p>
-            <p style="margin-top: 10px;">🎂 生日：2月9日 🎂</p>
-            <p>© 2026 本網站由杰哥維護</p>
+            <p class="footer-text">這份特別的生日祝福由杰哥打造、由HTML、CSS和JavaScript杰哥精心打造</p>
+            <p class="footer-text"><span class="footer-year">© 2026</span> 最炫酷的生日祝福 | 送給最特別的林晉鋮</p>
+            <p class="footer-text">🎂 生日：2月9日 🎂</p>
+            <p class="footer-text"><span class="footer-year">© 2026</span> 本網站由杰哥維護</p>
         </footer>
     </div>
     
@@ -622,7 +635,7 @@
             // 计算年龄（假设出生于2000年）
             // 由于不知道确切出生年份，我们使用一个常见的年份作为示例
             // 您可以根据需要修改这个年份
-            const birthYear = 2013; // 可以修改这个值
+            const birthYear = 2000; // 可以修改这个值
             let age = currentYear - birthYear;
             
             // 如果今年生日还没过，年龄减1
@@ -736,7 +749,7 @@
                 firework.classList.add('firework');
                 
                 // 随机颜色
-                const colors = ['#ff0080', '#ff8c00', '#40e0d0', '#ffd700', '#9d4edd'];
+                const colors = ['#ff0080', '#ff8c00', '#40e0d0, #ffd700', '#9d4edd'];
                 const color = colors[Math.floor(Math.random() * colors.length)];
                 
                 // 随机位置
