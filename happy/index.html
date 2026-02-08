@@ -190,42 +190,6 @@
             color: #f8f8f8;
         }
         
-        .counter-container {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            margin: 40px 0;
-            gap: 20px;
-        }
-        
-        .counter-box {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 20px;
-            min-width: 150px;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: transform 0.3s;
-        }
-        
-        .counter-box:hover {
-            transform: translateY(-10px);
-        }
-        
-        .counter-value {
-            font-size: 3rem;
-            font-weight: 700;
-            color: #ffd700;
-            font-family: 'Orbitron', sans-serif;
-        }
-        
-        .counter-label {
-            font-size: 1.2rem;
-            color: #aaa;
-            margin-top: 10px;
-        }
-        
         .interactive-section {
             background: rgba(255, 255, 255, 0.1);
             border-radius: 20px;
@@ -436,10 +400,6 @@
                 height: 300px;
             }
             
-            .counter-box {
-                min-width: 120px;
-            }
-            
             .emoji-btn {
                 width: 60px;
                 height: 60px;
@@ -465,7 +425,7 @@
             <h1 class="main-title">生日快樂</h1>
             <p class="subtitle">最炫酷的生日祝福送給</p>
             <h2 class="birthday-person" id="birthday-name">林晉鋮</h2>
-            <div class="birthday-date" id="birthday-date">🎂 生日：2月9日 🎂</div>
+            <div class="birthday-date" id="birthday-date">🎂 生日：2013年2月9日 🎂</div>
         </header>
         
         <div class="age-display">
@@ -483,21 +443,6 @@
                         <div class="cake-layer"></div>
                         <div class="candle"></div>
                         <div class="flame"></div>
-                    </div>
-                </div>
-                
-                <div class="counter-container">
-                    <div class="counter-box">
-                        <div class="counter-value" id="years">0</div>
-                        <div class="counter-label">歲月</div>
-                    </div>
-                    <div class="counter-box">
-                        <div class="counter-value" id="months">0</div>
-                        <div class="counter-label">月份</div>
-                    </div>
-                    <div class="counter-box">
-                        <div class="counter-value" id="days">0</div>
-                        <div class="counter-label">天數</div>
                     </div>
                 </div>
                 
@@ -571,7 +516,7 @@
         <footer>
             <p class="footer-text">這份特別的生日祝福由杰哥打造、由HTML、CSS和JavaScript杰哥精心打造</p>
             <p class="footer-text"><span class="footer-year">© 2026</span> 最炫酷的生日祝福 | 送給最特別的林晉鋮</p>
-            <p class="footer-text">🎂 生日：2月9日 🎂</p>
+            <p class="footer-text">🎂 生日：2013年2月9日 🎂</p>
             <p class="footer-text"><span class="footer-year">© 2026</span> 本網站由杰哥維護</p>
         </footer>
     </div>
@@ -622,24 +567,20 @@
                 retina_detect: true
             });
             
-            // 设置生日日期 - 林晉鋮的生日是2月9日
+            // 计算年龄 - 出生于2013年2月9日
             const now = new Date();
             const currentYear = now.getFullYear();
-            let birthday = new Date(currentYear, 1, 9); // 月份是0-based，所以1表示2月
+            const birthYear = 2013;
+            const birthMonth = 1; // 2月，0-based
+            const birthDay = 9;
             
-            // 如果今年生日已过，则计算下一个生日
-            if (now > birthday) {
-                birthday = new Date(currentYear + 1, 1, 9);
-            }
-            
-            // 计算年龄（假设出生于2000年）
-            // 由于不知道确切出生年份，我们使用一个常见的年份作为示例
-            // 您可以根据需要修改这个年份
-            const birthYear = 2000; // 可以修改这个值
             let age = currentYear - birthYear;
             
             // 如果今年生日还没过，年龄减1
-            if (now < new Date(currentYear, 1, 9)) {
+            const currentMonth = now.getMonth();
+            const currentDay = now.getDate();
+            
+            if (currentMonth < birthMonth || (currentMonth === birthMonth && currentDay < birthDay)) {
                 age--;
             }
             
@@ -647,32 +588,6 @@
             const ageElement = document.getElementById('age');
             ageElement.textContent = age;
             ageElement.style.animation = 'countUp 1s ease-out';
-            
-            // 更新计数器
-            function updateCounter() {
-                const now = new Date();
-                const diff = birthday - now;
-                
-                if (diff > 0) {
-                    // 计算年、月、日
-                    const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
-                    const months = Math.floor((diff % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30));
-                    const days = Math.floor((diff % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
-                    
-                    document.getElementById('years').textContent = years;
-                    document.getElementById('months').textContent = months;
-                    document.getElementById('days').textContent = days;
-                } else {
-                    // 生日已过，显示庆祝信息
-                    document.getElementById('years').textContent = "🎉";
-                    document.getElementById('months').textContent = "生";
-                    document.getElementById('days').textContent = "日";
-                }
-            }
-            
-            // 初始调用并设置定时器
-            updateCounter();
-            setInterval(updateCounter, 1000);
             
             // 表情祝福交互
             const emojiButtons = document.querySelectorAll('.emoji-btn');
@@ -749,7 +664,7 @@
                 firework.classList.add('firework');
                 
                 // 随机颜色
-                const colors = ['#ff0080', '#ff8c00', '#40e0d0, #ffd700', '#9d4edd'];
+                const colors = ['#ff0080', '#ff8c00', '#40e0d0', '#ffd700', '#9d4edd'];
                 const color = colors[Math.floor(Math.random() * colors.length)];
                 
                 // 随机位置
