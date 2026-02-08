@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>超炫酷生日祝福給「林晉誠」｜杰哥製作</title>
+    <title>超炫酷生日祝福給林晉鋮｜杰哥製作</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -74,6 +74,13 @@
             font-weight: 700;
             margin: 20px 0;
             animation: pulse 2s infinite;
+        }
+        
+        .birthday-date {
+            font-size: 2rem;
+            color: #40e0d0;
+            margin: 10px 0 30px;
+            font-weight: 600;
         }
         
         .content {
@@ -278,6 +285,25 @@
             flex-direction: column;
         }
         
+        .age-display {
+            text-align: center;
+            background: linear-gradient(45deg, #ff0080, #40e0d0);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            font-size: 2rem;
+            font-weight: 700;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .age-number {
+            font-size: 4rem;
+            color: #ffd700;
+            font-family: 'Orbitron', sans-serif;
+            margin: 10px 0;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+        }
+        
         .fireworks-btn {
             display: block;
             margin: 40px auto;
@@ -373,6 +399,11 @@
             100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
         }
         
+        @keyframes countUp {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
         /* 响应式设计 */
         @media (max-width: 768px) {
             .main-title {
@@ -381,6 +412,10 @@
             
             .birthday-person {
                 font-size: 2.5rem;
+            }
+            
+            .birthday-date {
+                font-size: 1.5rem;
             }
             
             .content {
@@ -400,6 +435,14 @@
                 height: 60px;
                 font-size: 2rem;
             }
+            
+            .age-display {
+                font-size: 1.5rem;
+            }
+            
+            .age-number {
+                font-size: 3rem;
+            }
         }
     </style>
 </head>
@@ -410,9 +453,16 @@
     <div class="container">
         <header>
             <h1 class="main-title">生日快樂</h1>
-            <p class="subtitle">最炫酷的生日祝福送給「林晉鋮」</p>
+            <p class="subtitle">最炫酷的生日祝福送給</p>
             <h2 class="birthday-person" id="birthday-name">林晉鋮</h2>
+            <div class="birthday-date" id="birthday-date">🎂 生日：2月9日 🎂</div>
         </header>
+        
+        <div class="age-display">
+            <div>林晉鋮今年</div>
+            <div class="age-number" id="age">?</div>
+            <div>歲了！</div>
+        </div>
         
         <div class="content">
             <div class="left-section">
@@ -433,38 +483,38 @@
                     </div>
                     <div class="counter-box">
                         <div class="counter-value" id="months">0</div>
-                        <div class="counter-label">02</div>
+                        <div class="counter-label">月份</div>
                     </div>
                     <div class="counter-box">
                         <div class="counter-value" id="days">0</div>
-                        <div class="counter-label">08</div>
+                        <div class="counter-label">天數</div>
                     </div>
                 </div>
                 
                 <div class="interactive-section">
-                    <h3 class="interactive-title">傳遞生日祝福</h3>
+                    <h3 class="interactive-title">給晉鋮的生日祝福</h3>
                     <p style="text-align: center; margin-bottom: 20px; color: #f8f8f8;">選擇一個表情符號傳達你的祝福</p>
                     
                     <div class="emoji-selector">
-                        <button class="emoji-btn" data-emoji="🎉" data-message="恭喜！祝你生日快樂！">🎉</button>
-                        <button class="emoji-btn" data-emoji="🎂" data-message="生日蛋糕送上，甜蜜一整年！">🎂</button>
-                        <button class="emoji-btn" data-emoji="🎁" data-message="禮物已送達，請查收！">🎁</button>
-                        <button class="emoji-btn" data-emoji="🥳" data-message="慶祝時刻到啦，一起狂歡！">🥳</button>
-                        <button class="emoji-btn" data-emoji="❤️" data-message="滿滿的愛與祝福送給你！">❤️</button>
-                        <button class="emoji-btn" data-emoji="⭐" data-message="願你如星星般閃耀！">⭐</button>
+                        <button class="emoji-btn" data-emoji="🎉" data-message="恭喜晉鋮！祝你生日快樂！">🎉</button>
+                        <button class="emoji-btn" data-emoji="🎂" data-message="生日蛋糕送上，願晉鋮甜蜜一整年！">🎂</button>
+                        <button class="emoji-btn" data-emoji="🎁" data-message="禮物已送達，請晉鋮查收！">🎁</button>
+                        <button class="emoji-btn" data-emoji="🥳" data-message="晉鋮的慶祝時刻到啦，一起狂歡！">🥳</button>
+                        <button class="emoji-btn" data-emoji="❤️" data-message="滿滿的愛與祝福送給晉鋮！">❤️</button>
+                        <button class="emoji-btn" data-emoji="⭐" data-message="願晉鋮如星星般閃耀！">⭐</button>
                     </div>
                     
                     <div class="message-display" id="message-display">
-                        點擊上面的表情符號來傳遞祝福！
+                        點擊上面的表情符號來祝福晉鋮！
                     </div>
                 </div>
             </div>
             
             <div class="right-section">
                 <div class="wish-box">
-                    <h3 class="wish-title">給林晉鋮的祝福</h3>
+                    <h3 class="wish-title">給晉鋮的祝福</h3>
                     <p class="wish-text">
-                        在這個特別的日子裡，願你的世界充滿陽光與歡笑！<br><br>
+                        親愛的林晉鋮，在這個特別的2月9日，願你的世界充滿陽光與歡笑！<br><br>
                         願你的每一個夢想都能實現，每一天都比昨天更加精彩。<br><br>
                         願幸福永遠伴隨你左右，健康與快樂常駐你心。<br><br>
                         生日快樂，願這一年是你人生中最美好的一章！
@@ -474,22 +524,22 @@
                 <div class="wish-box">
                     <h3 class="wish-title">特別的祝福</h3>
                     <p class="wish-text">
-                        希望你的生日充滿了驚喜與歡樂，<br>
+                        希望晉鋮的生日充滿了驚喜與歡樂，<br>
                         願你的未來像這頁面一樣光彩奪目！<br><br>
                         無論走到哪裡，都有好運相伴；<br>
                         無論做什麼，都能順心如意。<br><br>
-                        祝你心想事成，萬事如意！
+                        祝晉鋮心想事成，萬事如意！
                     </p>
                 </div>
                 
                 <div class="wish-box">
-                    <h3 class="wish-title">生日願望</h3>
+                    <h3 class="wish-title">給晉鋮的生日願望</h3>
                     <p class="wish-text">
-                        許下三個願望吧：<br><br>
+                        晉鋮，許下三個願望吧：<br><br>
                         1. 第一個願望送給家人和朋友<br>
                         2. 第二個願望送給未來的自己<br>
                         3. 第三個願望要保密哦！<br><br>
-                        願所有願望都能成真！
+                        願晉鋮所有願望都能成真！
                     </p>
                 </div>
             </div>
@@ -497,17 +547,19 @@
         
         <div class="button-group">
             <button class="fireworks-btn" id="fireworks-btn">
-                <i class="fas fa-fire"></i> 點燃生日煙火 <i class="fas fa-fire"></i>
+                <i class="fas fa-fire"></i> 為晉鋮點燃生日煙火 <i class="fas fa-fire"></i>
             </button>
             
             <button class="confetti-btn" id="confetti-btn">
-                <i class="fas fa-birthday-cake"></i> 拋灑五彩紙屑 <i class="fas fa-birthday-cake"></i>
+                <i class="fas fa-birthday-cake"></i> 為晉鋮拋灑五彩紙屑 <i class="fas fa-birthday-cake"></i>
             </button>
         </div>
         
         <footer>
-            <p>這份特別的生日祝福由杰哥製作 由HTML、CSS和JavaScript杰哥精心打造</p>
+            <p>這份特別的生日祝福由杰哥打造、由HTML、CSS和JavaScript杰哥精心打造</p>
             <p>© 2026 最炫酷的生日祝福 | 送給最特別的林晉鋮</p>
+            <p style="margin-top: 10px;">🎂 生日：2月9日 🎂</p>
+            <p>© 2026 本網站由杰哥維護</p>
         </footer>
     </div>
     
@@ -518,7 +570,7 @@
         // 初始化粒子背景
         document.addEventListener('DOMContentLoaded', function() {
             // 设置生日人物名称
-            const birthdayName = "XXX"; // 在这里修改名字
+            const birthdayName = "林晉鋮";
             document.getElementById('birthday-name').textContent = birthdayName;
             
             // 初始化粒子背景
@@ -557,10 +609,31 @@
                 retina_detect: true
             });
             
-            // 设置生日日期 (修改为XXX的生日)
-            const birthday = new Date();
-            birthday.setMonth(birthday.getMonth() + 1); // 下个月
-            birthday.setDate(15); // 15号
+            // 设置生日日期 - 林晉鋮的生日是2月9日
+            const now = new Date();
+            const currentYear = now.getFullYear();
+            let birthday = new Date(currentYear, 1, 9); // 月份是0-based，所以1表示2月
+            
+            // 如果今年生日已过，则计算下一个生日
+            if (now > birthday) {
+                birthday = new Date(currentYear + 1, 1, 9);
+            }
+            
+            // 计算年龄（假设出生于2000年）
+            // 由于不知道确切出生年份，我们使用一个常见的年份作为示例
+            // 您可以根据需要修改这个年份
+            const birthYear = 2013; // 可以修改这个值
+            let age = currentYear - birthYear;
+            
+            // 如果今年生日还没过，年龄减1
+            if (now < new Date(currentYear, 1, 9)) {
+                age--;
+            }
+            
+            // 显示年龄
+            const ageElement = document.getElementById('age');
+            ageElement.textContent = age;
+            ageElement.style.animation = 'countUp 1s ease-out';
             
             // 更新计数器
             function updateCounter() {
@@ -759,6 +832,26 @@
             setTimeout(() => {
                 createConfetti(50);
             }, 1500);
+            
+            // 检查今天是否是林晉鋮的生日
+            const today = new Date();
+            const isBirthday = today.getMonth() === 1 && today.getDate() === 9; // 1 = 2月
+            
+            if (isBirthday) {
+                // 如果是生日，显示特别消息并自动触发效果
+                messageDisplay.innerHTML = `
+                    <div style="font-size: 3rem; margin-bottom: 10px;">🎂🎉🎁</div>
+                    <div>今天是晉鋮的生日！讓我們一起慶祝！</div>
+                `;
+                
+                setTimeout(() => {
+                    createFireworks(30);
+                }, 2000);
+                
+                setTimeout(() => {
+                    createConfetti(100);
+                }, 2500);
+            }
         });
     </script>
 </body>
